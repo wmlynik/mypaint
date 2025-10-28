@@ -412,9 +412,11 @@ class FreehandMode(
         # button pressed down, and substitute the last-known good value.
         # Detail: https://github.com/mypaint/mypaint/issues/29
         drawstate = self._get_drawing_state(tdw)
+        if drawstate.button_down is None:
+            pressure = 0.0
         if drawstate.button_down is not None:
             if pressure == 0.0:
-                pressure = drawstate.last_good_raw_pressure
+                pass
             elif pressure is not None and np.isfinite(pressure):
                 drawstate.last_good_raw_pressure = pressure
 
